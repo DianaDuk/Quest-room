@@ -1,0 +1,64 @@
+[
+    {
+        "title": "Склеп",
+        "people": "2-5",
+        "level": "сложный",
+        "img": "/sklep.jpg" 
+    },
+
+    {
+        "title": "Маньяк",
+        "people": "3-6",
+        "level": "средний",
+        "img": "/maniak.jpg" 
+    },
+
+    {
+        "title": "Ритуал",
+        "people": "3-5",
+        "level": "сложный",
+        "img": "/ritual.jpg" 
+    },
+
+    {
+        "title": "Марс-2056",
+        "people": "2-4",
+        "level": "легкий",
+        "img": "/mars.jpg" 
+    },
+
+    {
+        "title": "Тайны старого особняка",
+        "people": "2-5",
+        "level": "легкий",
+        "img": "/taina.jpg" 
+    },
+
+    {
+        "title": "Хижина в лесу",
+        "people": "4-7",
+        "level": "средний",
+        "img": "/hizina.jpg" 
+    },
+
+    {
+        "title": "Фатальный эксперимент",
+        "people": "5-8",
+        "level": "сложный",
+        "img": "/fatalnii.jpg" 
+    },
+
+    {
+        "title": "Метро 2023",
+        "people": "6-8",
+        "level": "средний",
+        "img": "/metro.jpg" 
+    },
+
+    {
+        "title": "Старый чердак",
+        "people": "2-3",
+        "level": "легкий",
+        "img": "/cherdak.jpg" 
+    }
+]

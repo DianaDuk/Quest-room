@@ -3,6 +3,7 @@ import './index.css'
 import Header from './layouts/Header/Header'
 import MainPage from './pages/MainPage/MainPage'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Footer from './layouts/Footer/Footer'
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="*" element={<div>Страница не найдена</div>} />
       </Routes>
+      <Footer/>
     </Router>
     </Box>
     </>

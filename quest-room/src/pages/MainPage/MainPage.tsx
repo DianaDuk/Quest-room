@@ -1,8 +1,26 @@
 import { Box, Text, Button, Image } from "@chakra-ui/react"
 import QuestCard from "../../components/QuestCard/QuestCard"
-import quests from "../../components/QuestCard/data.json"
+import { useEffect, useState } from "react"
+import { getQuests, type Quest } from "../../api/QuestAPI"
 
 const MainPage = () => {
+  const [quests, setQuests] = useState<Quest[]>([])
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    const fetchQuests = async () => {
+      try {
+        const data = await getQuests()
+        setQuests(data)
+      } catch(error) {
+        setError('Error while fetching quests')
+        console.log('Failed to fetch quests:', error)
+      }
+    }
+
+    fetchQuests()
+  }, [])
+
   return (
     <Box>
       <Box pl="130" pt="3" display="flex" flexDirection="column" gap="8px">
@@ -42,7 +60,7 @@ const MainPage = () => {
     <Box pl="130px" py="40px">
      <Box w="1082px" className="flex flex-wrap" gap="25px">
        {quests.map((quest, index) => (
-        <QuestCard key={index} title={quest.title} people={quest.people} level={quest.level} img={quest.img}/>
+        <QuestCard key={index} title={quest.title} people={quest.players} level={quest.level} img={quest.image}/>
       ))}
      </Box>
       

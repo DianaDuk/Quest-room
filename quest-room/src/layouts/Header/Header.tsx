@@ -13,7 +13,7 @@ const Header = () => {
                 <ListItem><Link href=''>НОВИЧКАМ</Link></ListItem>
                 <ListItem><Link href=''>ОТЗЫВЫ</Link></ListItem>
                 <ListItem><Link href=''>АКЦИИ</Link></ListItem>
-                <ListItem onClick={() => navigate('/contacts')}>КОНТАКТЫ</ListItem>
+                <ListItem cursor='pointer' onClick={() => navigate('/contacts')}>КОНТАКТЫ</ListItem>
             </List>
         <Text className="header-number">8 (800) 333-55-99</Text>
     </Box>

@@ -17,3 +17,8 @@ export const getQuests = async (): Promise<Quest[]> => {
     const response = await axios.get<Quest[]>(`${API_URL}/quests`)
     return response.data
 }
+
+export const getQuest = async (id: any): Promise<Quest> => {
+    const response = await axios.get<Quest>(`${API_URL}/quests/${id}`)
+    return response.data
+}

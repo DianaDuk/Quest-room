@@ -1,8 +1,13 @@
 import { NavLink } from "react-router-dom"
 import { Box, Image, Link, ListItem, Text, List } from "@chakra-ui/react"
+import RegisterModal from "../../components/RegisterModal/RegisterModal";
+import { useState } from "react";
 
 const Header = () => {
-    const linkStyle = {
+  
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const linkStyle = {
     textDecoration: "none",
     color: "#fff",
   };
@@ -23,7 +28,10 @@ const Header = () => {
                 <ListItem><Link href=''>АКЦИИ</Link></ListItem>
                 <ListItem><NavLink to="/contacts" style={({ isActive }) => (isActive ? activeStyle : linkStyle)}>КОНТАКТЫ</NavLink></ListItem>
             </List>
-        <Text className="header-number">8 (800) 333-55-99</Text>
+        <Box w="134px" className="flex justify-end" onClick={() => setIsModalOpen(true)}>
+          <Image src="/person.svg" alt="Person svg" w="24px"/>
+        </Box>
+        <RegisterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
     </Box>
   )
 }

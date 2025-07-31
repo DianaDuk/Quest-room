@@ -1,5 +1,4 @@
-import axios from 'axios'
-
+import { useQuery } from '@tanstack/react-query'
 const API_URL = 'http://localhost:3000'
 
 export interface Quest {
@@ -12,13 +11,33 @@ export interface Quest {
     level: string
     image: string
 }
+const fetchQuests = async (category: string): Promise<Quest[]> => {
+  const query =
+    category && category !== 'все квесты'
+      ? `?search=${encodeURIComponent(category)}`
+      : '';
+  const response = await fetch(`${API_URL}/quests${query}`);
+  if (!response.ok) throw new Error('Failed to fetch quests');
+  return response.json();
+};
 
-export const getQuests = async (): Promise<Quest[]> => {
-    const response = await axios.get<Quest[]>(`${API_URL}/quests`)
-    return response.data
-}
+ const fetchQuest = async (id: number): Promise<Quest> => {
+    const response = await fetch(`${API_URL}/quests/${id}`);
+    if (!response.ok) throw new Error ('Failed to fetch quests');
+    return response.json();
+};
 
-export const getQuest = async (id: any): Promise<Quest> => {
-    const response = await axios.get<Quest>(`${API_URL}/quests/${id}`)
-    return response.data
-}
+export const useQuests = (category: string) => {
+  return useQuery<Quest[], Error>({
+    queryKey: ['quests', category],
+    queryFn: () => fetchQuests(category),
+  });
+};
+
+export const useQuest = (id: number) => {
+    return useQuery<Quest, Error>({
+        queryKey: ['quest', id],
+        queryFn: () => fetchQuest(id),
+        enabled: !!id,
+    });
+};

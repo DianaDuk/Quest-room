@@ -1,11 +1,9 @@
 import { Box, Text, Button, Image } from "@chakra-ui/react";
 import QuestCard from "../../components/QuestCard/QuestCard";
 import { useEffect, useState } from "react";
-import { getQuests, type Quest } from "../../api/QuestAPI";
+import { useQuests, type Quest } from "../../api/QuestAPI";
 
 const MainPage = () => {
-  const [quests, setQuests] = useState<Quest[]>([]);
-  const [error, setError] = useState("");
   const [activeFilter, setActiveFilter] = useState<string>("все квесты");
 
   const filters = [
@@ -17,26 +15,14 @@ const MainPage = () => {
     { title: "Sci-fi", value: "sci-fi", img: "/scifi.svg" },
   ];
 
-  const fetchQuests = async (search = "") => {
-    try {
-      const query = search && search !== "все квесты" ? `?search=${encodeURIComponent(search)}` : "";
-      const response = await fetch(`http://localhost:3000/quests${query}`);
-      const data = await response.json();
-      setQuests(data);
-    } catch (error) {
-      setError("Error while fetching quests");
-      console.log("Failed to fetch quests:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchQuests();
-  }, []);
+  const {data: quests, isLoading, error} = useQuests(activeFilter);
 
   const handleCategoryClick = (category: string) => {
     setActiveFilter(category);
-    fetchQuests(category);
   };
+
+    if(isLoading) return <Text>Loading...</Text>;
+    if(error) return <Text>Error loading quest</Text>;
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
@@ -66,9 +52,9 @@ const MainPage = () => {
 
       <Box className="flex justify-center" py="40px">
         <Box w="1082px" className="flex flex-wrap" gap="25px">
-          {quests.map((quest, index) => (
+          {quests?.map((quest) => (
             <QuestCard
-              key={index}
+              key={quest.id}
               title={quest.title}
               people={quest.players}
               level={quest.level}
